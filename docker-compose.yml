@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  mysql:
+    image: mysql:8.0
+    restart: on-failure
+    environment:
+      MY_SQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mycantine
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+  adminer:
+    image: adminer:latest
+    restart: on-failure
+    ports:
+    - '8080:8080'
+  nginx:
+    image: nginx:1.17.9-alpine
+    restart: on-failure
+    volumes:
+      - './myCantine/public/:/user/src/app/'
+      - './docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro'
+    ports:
+      - '80:80'
+    depends_on:
+      - php
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    restart: on-failure
+    env_file:
+      - .env
+  elk:
+    image: willdurand/elk
+    ports:
+      - 81:80
+    volumes:
+      - ./elk/logstash:/etc/logstash
+      - ./elk/logstash/patterns:/opt/logstash/patterns
