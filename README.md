@@ -9,6 +9,7 @@
 
 ## Comment initialiser le projet
 Utiliser la commande suivante poru cloner la stack Docker ainsi que le projet MyCantine Symfony
+
 ```git clone https://github.com/GroupeNRM/Docker-MyCantine.git --recurse-submodules```
 
 ## Initialisation de la stack Docker
