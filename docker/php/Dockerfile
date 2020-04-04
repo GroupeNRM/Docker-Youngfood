@@ -23,7 +23,7 @@ RUN composer --version
 
 WORKDIR /usr/src/app
 
-COPY myCantine /usr/src/app
+COPY MyCantineApp /usr/src/app
 
 RUN cd /usr/src/app
 RUN composer install

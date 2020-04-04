@@ -18,7 +18,7 @@ services:
     image: nginx:1.17.9-alpine
     restart: on-failure
     volumes:
-      - './myCantine/public/:/user/src/app/'
+      - './MyCantineApp/public/:/user/src/app/'
       - './docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro'
     ports:
       - '80:80'
