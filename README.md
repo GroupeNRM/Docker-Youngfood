@@ -8,9 +8,15 @@
 * ELK
 
 ## Comment initialiser le projet
-Utiliser la commande suivante poru cloner la stack Docker ainsi que le projet MyCantine Symfony
+Utiliser la commande suivante pour cloner la stack Docker ainsi que le projet MyCantine Symfony
 
 ```git clone https://github.com/GroupeNRM/Docker-MyCantine.git --recurse-submodules```
+
+## Modification des variables d'env
+Afin de saisir un mot de passe personnalisé pour MySQL il est **nécessaire** de modifier le fichier
+.env-exemple en y renseignant les champs. Ensuite il faut renommer ce fichier en .env
+
+Sous linux : ```mv .env-exemple .env```
 
 ## Initialisation de la stack Docker
 Pour construire votre stack:
@@ -19,10 +25,19 @@ Pour construire votre stack:
 Une fois toute cette procédure d'initialisation terminée :
 ```docker-compose up```
 
+## Sous module Symfony
+Il est très fortement possible que lorsque vous arrivez sur le projet Symfony, vous soyez dans un "HEAD detaché", afin de revenir
+dans un état "attaché", il suffit de faire un ```git checkout "votre branche"```.
+
+## Make
+La commande make permet d'enregistrer des commandes répétitives et de leurs assignés un nom.
+
+Pour enregistrer une nouvelle commande il suffit d'ajouter une nouvelle entrée dans le fichier Makefile, ensuite pour éxecuter cette commande :
+```make "nom de la commande"```.
+
 ## Commande utile:
 Clear cache :
 ```docker-compose exec php php /usr/src/app/bin/console cache:clear```
 
-## Axe d'amélioration: 
-* Ajout de Make
-* Possibilité de configurer manuellement les MDP de la DB
+Accès au bash :
+```docker-compose exec php bash```

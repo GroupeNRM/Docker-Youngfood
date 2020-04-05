@@ -1,19 +1,16 @@
 version: '3.7'
 services:
-  db:
-    image: mysql:8.0
-    restart: on-failure
-    environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_DATABASE: mycantine
   adminer:
     image: adminer:latest
     restart: on-failure
     ports:
       - '8080:8080'
-    depends_on:
-      - db
+  db:
+    image: mysql:8.0
+    restart: on-failure
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
   nginx:
     image: nginx:1.17.9-alpine
     restart: on-failure
@@ -30,7 +27,7 @@ services:
       dockerfile: docker/php/Dockerfile
     restart: on-failure
     env_file:
-      - .env
+      - .phpenv
   elk:
     image: willdurand/elk
     ports:

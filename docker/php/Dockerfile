@@ -13,6 +13,12 @@ RUN docker-php-source extract \
 # git client
 RUN apk add --update --no-cache git
 
+# Make command
+RUN apk add --update make
+
+# add bash
+RUN apk add --update bash
+
 RUN apk add --update libzip-dev
 
 RUN docker-php-ext-install zip
