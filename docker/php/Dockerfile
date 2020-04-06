@@ -10,6 +10,10 @@ RUN docker-php-source extract \
     && apk del .phpize-deps-configure \
     && docker-php-source delete
 
+# add yarn
+RUN apk add --update yarn
+RUN yarn --version
+
 # git client
 RUN apk add --update --no-cache git
 
@@ -33,6 +37,8 @@ COPY MyCantineApp /usr/src/app
 
 RUN cd /usr/src/app
 RUN composer install
+
+RUN yarn install
 
 RUN chown -R www-data:www-data /usr/src/app/
 RUN PATH=$PATH:/usr/src/app/vendor/bin:bin

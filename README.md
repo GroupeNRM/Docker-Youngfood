@@ -29,6 +29,11 @@ Une fois toute cette procédure d'initialisation terminée :
 Il est très fortement possible que lorsque vous arrivez sur le projet Symfony, vous soyez dans un "HEAD detaché", afin de revenir
 dans un état "attaché", il suffit de faire un ```git checkout "votre branche"```.
 
+## Initialisation du projet Symfony
+Il faut maintenant télécharger les vendor PHP en local en faisant un ```composer install```
+
+Puis les dépendances (en local toujours) Yarn en faisant un ```yarn install```
+
 ## Make
 La commande make permet d'enregistrer des commandes répétitives et de leurs assignés un nom.
 
