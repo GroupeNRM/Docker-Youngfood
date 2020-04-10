@@ -1,44 +1,52 @@
-FROM php:7.4.1-fpm-alpine
+FROM alpine:3.11
 
-RUN docker-php-ext-install pdo_mysql
+RUN addgroup -S www \
+    && adduser -S -G www www
 
-# apcu
-RUN docker-php-source extract \
-    && apk add --no-cache --virtual .phpize-deps-configure $PHPIZE_DEPS \
-    && pecl install apcu \
-    && docker-php-ext-enable apcu \
-    && apk del .phpize-deps-configure \
-    && docker-php-source delete
+RUN apk add --update \
+    php7-apcu \
+    php7-ctype \
+    php7-curl \
+    php7-dom \
+    php7-gd \
+    php7-iconv \
+    php7-imagick \
+    php7-json \
+    php7-intl \
+    php7-mcrypt \
+    php7-fileinfo \
+    php7-fpm \
+    php7-mbstring \
+    php7-opcache \
+    php7-openssl \
+    php7-pdo \
+    php7-pdo_mysql \
+    php7-mysqli \
+    php7-xml \
+    php7-zlib \
+    php7-phar \
+    php7-tokenizer \
+    php7-session \
+    php7-simplexml \
+    php7-xmlwriter \
+#    php7-xdebug \
+    php7-xsl \
+    php7-zip \
+    make \
+    curl \
+    nodejs \
+    yarn
 
-# add yarn
-RUN apk add --update yarn
-RUN yarn --version
+RUN rm -rf /var/cache/apk/* && rm -rf /tmp/* && \
+    RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# git client
-RUN apk add --update --no-cache git
+ADD php.ini /etc/php7/conf.d/
+ADD php.ini /etc/php7/cli/conf.d/
+ADD php-fpm.conf /etc/php7/php-fpm.d/
+#ADD xdebug.ini  /etc/php7/conf.d/
 
-# Make command
-RUN apk add --update make
+WORKDIR /var/www/symfony
 
-# add bash
-RUN apk add --update bash
+EXPOSE 9001
 
-RUN apk add --update libzip-dev
-
-RUN docker-php-ext-install zip
-RUN docker-php-ext-enable apcu
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer --version
-
-WORKDIR /usr/src/app
-
-COPY MyCantineApp /usr/src/app
-
-RUN cd /usr/src/app
-RUN composer install
-
-RUN yarn install
-
-RUN chown -R www-data:www-data /usr/src/app/
-RUN PATH=$PATH:/usr/src/app/vendor/bin:bin
+CMD ["php-fpm7", "-F"]

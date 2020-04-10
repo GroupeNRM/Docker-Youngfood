@@ -1,37 +1,41 @@
 version: '3.7'
 services:
-  adminer:
-    image: adminer:latest
-    restart: on-failure
-    ports:
-      - '8080:8080'
   db:
-    image: mysql:8.0
-    restart: on-failure
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-  nginx:
-    image: nginx:1.17.9-alpine
-    restart: on-failure
-    volumes:
-      - './MyCantineApp/public/:/user/src/app/'
-      - './docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro'
+    image: mysql:latest
+    restart: always
     ports:
-      - '80:80'
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+  php:
+    build: ./docker/php
+    restart: always
+    ports:
+      - '9000:9001'
+    depends_on:
+      - db
+    volumes:
+      - ./MyCantineApp/:/var/www/symfony:cached
+    environment:
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@database:3306/${MYSQL_DATABASE}?serverVersion=5.7
+  nginx:
+    build: ./docker/nginx
+    restart: always
+    ports:
+      - "${NGINX_HOST_HTTP_PORT}:80"
     depends_on:
       - php
-  php:
-    build:
-      context: .
-      dockerfile: docker/php/Dockerfile
-    restart: on-failure
-    env_file:
-      - .phpenv
-  elk:
-    image: willdurand/elk
-    ports:
-      - 81:80
     volumes:
-      - ./elk/logstash:/etc/logstash
-      - ./elk/logstash/patterns:/opt/logstash/patterns
+      - ./logs/nginx:/var/log/nginx:cached
+      - ./MyCantineApp/:/var/www/symfony:cached
+  adminer:
+    image: adminer:latest
+    restart: always
+    ports: ['8080:8080']
+    depends_on:
+      - db
