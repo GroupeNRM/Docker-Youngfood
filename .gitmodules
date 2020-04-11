@@ -1,1 +1,4 @@
 
+[submodule "MyCantineApp"]
+	path = MyCantineApp
+	url = https://github.com/GroupeNRM/MyCantineApp.git
