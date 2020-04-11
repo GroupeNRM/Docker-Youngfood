@@ -12,6 +12,8 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - DB_CONNECTION=mysql
       - DB_HOST=mysql
+    volumes:
+    - ./db/data/:/var/lib/myqsl
   php:
     build: ./docker/php
     restart: always
@@ -39,3 +41,7 @@ services:
     ports: ['8080:8080']
     depends_on:
       - db
+  maildev:
+    image: maildev/maildev
+    ports:
+      - "1080:80"
