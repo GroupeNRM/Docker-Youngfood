@@ -1,11 +1,10 @@
 # Stack Docker MyCantineApp
 
 ## Contenu de la stack 
-* PHP 7.4.1 FPM Alpine
+* PHP 7.3.16 FPM
 * Serveur Nginx 1.17.9 Alpine
 * MySQL 8
 * Adminer
-* ELK
 
 ## Comment initialiser le projet
 Utiliser la commande suivante pour cloner la stack Docker ainsi que le projet MyCantine Symfony
@@ -33,6 +32,9 @@ dans un état "attaché", il suffit de faire un ```git checkout "votre branche"`
 Il faut maintenant télécharger les vendor PHP en local en faisant un ```composer install```
 
 Puis les dépendances (en local toujours) Yarn en faisant un ```yarn install```
+
+## Connexion à la Base de Donnée
+Afin de se connecter à la base de donnée, il est nécéssaire de renseigner le nom de serveur : "db"
 
 ## Make
 La commande make permet d'enregistrer des commandes répétitives et de leurs assignés un nom.
