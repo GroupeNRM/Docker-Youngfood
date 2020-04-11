@@ -35,10 +35,11 @@ RUN apk add --update \
     make \
     curl \
     nodejs \
-    yarn
+    yarn \
+    bash
 
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/* && \
-    RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 ADD php.ini /etc/php7/conf.d/
 ADD php.ini /etc/php7/cli/conf.d/
