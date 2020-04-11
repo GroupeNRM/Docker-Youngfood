@@ -16,7 +16,7 @@ Utiliser la commande suivante pour cloner la stack Docker ainsi que le projet My
 Afin de saisir un mot de passe personnalisé pour MySQL il est **nécessaire** de modifier le fichier
 .env-exemple en y renseignant les champs. Ensuite il faut renommer ce fichier en .env
 
-Sous linux : ```mv .env-exemple .env```
+Sous linux : ```mv .env.dist .env```
 
 ## Initialisation de la stack Docker
 Pour construire votre stack:
