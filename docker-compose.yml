@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   db:
-    image: mysql:latest
+    image: mysql:5.7
     restart: always
     ports:
       - '3306:3306'
@@ -23,8 +23,6 @@ services:
       - db
     volumes:
       - ./MyCantineApp/:/var/www/symfony:cached
-    environment:
-      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@database:3306/${MYSQL_DATABASE}?serverVersion=5.7
   nginx:
     build: ./docker/nginx
     restart: always
