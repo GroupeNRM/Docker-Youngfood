@@ -1,4 +1,4 @@
-# Stack Docker MyCantineApp
+# Stack Docker Youngfood
 
 ## Contenu de la stack 
 * PHP 7.3.16 FPM
@@ -10,7 +10,7 @@
 ## Comment initialiser le projet
 Utiliser la commande suivante pour cloner la stack Docker ainsi que le projet MyCantine Symfony
 
-```git clone https://github.com/GroupeNRM/Docker-MyCantine.git --recurse-submodules```
+```git clone https://github.com/GroupeNRM/Docker-Youngfood.git --recurse-submodules```
 
 ## Modification des variables d'env
 Afin de saisir un mot de passe personnalisé pour MySQL il est **nécessaire** de modifier le fichier
