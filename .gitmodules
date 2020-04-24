@@ -1,4 +1,3 @@
-
-[submodule "MyCantineApp"]
-	path = MyCantineApp
-	url = https://github.com/GroupeNRM/MyCantineApp.git
+[submodule "Youngfood"]
+	path = Youngfood
+	url = https://github.com/GroupeNRM/Youngfood.git
