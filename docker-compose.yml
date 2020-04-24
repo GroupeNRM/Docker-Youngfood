@@ -22,7 +22,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./MyCantineApp/:/var/www/symfony:cached
+      - ./Youngfood/:/var/www/symfony:cached
   nginx:
     build: ./docker/nginx
     restart: always
@@ -32,7 +32,7 @@ services:
       - php
     volumes:
       - ./logs/nginx:/var/log/nginx:cached
-      - ./MyCantineApp/:/var/www/symfony:cached
+      - ./Youngfood/:/var/www/symfony:cached
   adminer:
     image: adminer:latest
     restart: always
