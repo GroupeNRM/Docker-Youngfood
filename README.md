@@ -3,12 +3,13 @@
 ## Contenu de la stack 
 * PHP 7.3.16 FPM
 * Serveur Nginx 1.17.9 Alpine
-* MySQL 8
+* MySQL 5.7
 * Adminer
 * Maildev
+* Mercure
 
 ## Comment initialiser le projet
-Utiliser la commande suivante pour cloner la stack Docker ainsi que le projet MyCantine Symfony
+Utiliser la commande suivante pour cloner la stack Docker ainsi que le projet Youngfood Symfony
 
 ```git clone https://github.com/GroupeNRM/Docker-Youngfood.git --recurse-submodules```
 
