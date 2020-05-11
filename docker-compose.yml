@@ -52,4 +52,4 @@ services:
       - PUBLISH_ALLOWED_ORIGINS=http://localhost:1337,https://localhost:1338
       - DEMO=1
     ports:
-      - "1337:80"
+      - "${MERCURE_PORT}:80"
